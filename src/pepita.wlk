@@ -1,7 +1,7 @@
 import wollok.game.*
 
 object pepita {
-
+	//Prueba
 	method position() {
 		return game.center()
 	}
