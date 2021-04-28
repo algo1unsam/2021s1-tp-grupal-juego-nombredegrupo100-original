@@ -1,13 +1,13 @@
 import wollok.game.*
 
-object pepita {
+object bomberman {
 	
-	var property position = game.center()
+	var property position = game.at(10,10)
 
+		
 	method image() {
-		return "Bomber.jpeg"
-
-	}
+		return "bomber1.png"
+		}
 	method moverseArriba(){
 		const lista = []
 		
