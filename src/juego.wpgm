@@ -1,8 +1,13 @@
 import wollok.game.*
 import pepita.*
+import objects.*
 
 program juego {
 	game.title("Juego Base")
 	game.addVisual(pepita)
+	game.height(15)
+	game.width(15)
+	game.boardGround("suelo.png")
+	configuracion.configurarTeclas()
 	game.start()
 }
