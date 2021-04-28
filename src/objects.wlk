@@ -4,9 +4,9 @@ import wollok.game.*
 object configuracion {
 	
 		method configurarTeclas() {
-		keyboard.left().onPressDo({ pepita.moverseIzquierda() })
-		keyboard.right().onPressDo({ pepita.moverseDerecha() })
-		keyboard.up().onPressDo({ pepita.moverseArriba() })
-		keyboard.down().onPressDo({ pepita.moverseAbajo() })
+		keyboard.left().onPressDo({ bomberman.moverseIzquierda() })
+		keyboard.right().onPressDo({ bomberman.moverseDerecha() })
+		keyboard.up().onPressDo({ bomberman.moverseArriba() })
+		keyboard.down().onPressDo({ bomberman.moverseAbajo() })
 	}
 }
