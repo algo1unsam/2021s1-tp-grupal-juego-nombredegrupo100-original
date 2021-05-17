@@ -4,9 +4,9 @@ import objects.*
 
 program juego {
 	game.title("Juego Base")
-	game.addVisual(bomberman)
-	game.height(13)
-	game.width(15)
+	game.addVisual(pepita)
+	game.height(13*6)
+	game.width(15*6)
 	game.boardGround("fondo.png")
 	configuracion.configurarTeclas()
 	game.start()
