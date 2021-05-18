@@ -4,9 +4,11 @@ import objects.*
 
 program juego {
 	game.title("Juego Base")
+	
 	game.addVisual(pepita)
 	game.height(13*6)
 	game.width(15*6)
+	game.cellSize(50)
 	game.boardGround("fondo.png")
 	configuracion.configurarTeclas()
 	game.start()
