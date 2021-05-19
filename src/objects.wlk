@@ -7,5 +7,6 @@ object configuracion {				//configuracion de las teclas
 		keyboard.right().onPressDo({ bomber.moverseDerecha() })
 		keyboard.up().onPressDo({ bomber.moverseArriba()})
 		keyboard.down().onPressDo({ bomber.moverseAbajo()})
+		keyboard.space().onPressDo({ bomber.ponerBomba()})		//por ahora, con espacio de pone una bomba
 	}
 }
