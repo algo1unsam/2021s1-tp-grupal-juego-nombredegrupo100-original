@@ -1,11 +1,11 @@
 import pepita.*
 import wollok.game.*
 
-object configuracion {
+object configuracion {				//configuracion de las teclas
 		method configurarTeclas() {
-		keyboard.left().onPressDo({ pepita.moverseIzquierda() })
-		keyboard.right().onPressDo({ pepita.moverseDerecha() })
-		keyboard.up().onPressDo({ pepita.moverseArriba()})
-		keyboard.down().onPressDo({ pepita.moverseAbajo()})
+		keyboard.left().onPressDo({ bomber.moverseIzquierda() })
+		keyboard.right().onPressDo({ bomber.moverseDerecha() })
+		keyboard.up().onPressDo({ bomber.moverseArriba()})
+		keyboard.down().onPressDo({ bomber.moverseAbajo()})
 	}
 }

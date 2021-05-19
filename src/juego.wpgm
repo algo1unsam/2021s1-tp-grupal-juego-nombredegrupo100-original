@@ -1,11 +1,18 @@
 import wollok.game.*
 import pepita.*
 import objects.*
+import animados.*
+import bloque.*
 
-program juego {
+program juego {				//programa del juego principal
+
 	game.title("Juego Base")
 	
-	game.addVisual(pepita)
+	const bloque1 = new Bloque()
+	
+	game.addVisual(bloque1)
+	
+	game.addVisual(bomber)
 	game.height(13*6)
 	game.width(15*6)
 	game.cellSize(50)

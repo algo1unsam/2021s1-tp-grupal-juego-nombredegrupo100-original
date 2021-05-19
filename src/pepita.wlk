@@ -1,10 +1,10 @@
 import wollok.game.*
+import animados.*
 
-object pepita {
+object bomber inherits Animados {		//hereda de animados las funciones de animacion
 	
 	var property image = "bomber.png"
-	var property position = game.at(6,69)
-	var indice = 0
+	var property position = game.at(6,66)
 	const imagenes_arriba = ["bomber_arriba1.png","bomber_arriba2.png","bomber_atras.png","bomber_arriba3.png","bomber_arriba4.png","bomber_atras.png"]
 	const imagenes_abajo = ["bomber_abajo1.png","bomber_abajo2.png","bomber.png","bomber_abajo3.png","bomber_abajo4.png","bomber.png"]
 	const imagenes_derecha = ["bomber_derecha1.png","bomber_derecha2.png","bomber_derecha.png","bomber_derecha3.png","bomber_derecha4.png","bomber_derecha.png"]
@@ -20,31 +20,17 @@ object pepita {
 	method moverseArriba(){
 		const destino = self.position().up(6)
 		
-		if (destino.y() <=  69 and not bloques_prohibidos.contains(destino)){
-			game.onTick(25,"moverse arriba",{
-				self.image(imagenes_arriba.get(indice))
-				indice += 1
-				position = self.position().up(1)
-				if(indice > 5){
-					game.removeTickEvent("moverse arriba")
-					indice = 0
-				}
-			})
+		if (destino.y() <=  66 and not bloques_prohibidos.contains(destino)){
+			
+			self.animacionArriba(imagenes_arriba,self)
 		}
 	}
 	method moverseAbajo(){
 		const destino = self.position().down(6)
 		
 		if (destino.y() >= 6 and not bloques_prohibidos.contains(destino)){
-			game.onTick(25,"moverse abajo",{
-				self.image(imagenes_abajo.get(indice))
-				indice += 1
-				position = self.position().down(1)
-				if(indice > 5){
-					game.removeTickEvent("moverse abajo")
-					indice = 0
-				}
-			})
+			
+			self.animacionAbajo(imagenes_abajo,self)
 		}
 	}
 	
@@ -52,30 +38,16 @@ object pepita {
 		const destino = self.position().right(6)
 
 		if (destino.x() <= 13*6 and not bloques_prohibidos.contains(destino)){
-			game.onTick(25,"moverse derecha",{
-				self.image(imagenes_derecha.get(indice))
-				indice += 1
-				position = self.position().right(1)
-				if(indice > 5){
-					game.removeTickEvent("moverse derecha")
-					indice = 0
-				}
-			})
+			
+			self.animacionDerecha(imagenes_derecha,self)
 		}
 	}
 	method moverseIzquierda(){
 		const destino = self.position().left(6)
 
 		if(destino.x() >= 6 and not bloques_prohibidos.contains(destino)){
-			game.onTick(25,"moverse izquierda",{
-				self.image(imagenes_izquierda.get(indice))
-				indice += 1
-				position = self.position().left(1)
-				if(indice > 5){
-					game.removeTickEvent("moverse izquierda")
-					indice = 0
-				}
-			})	
+			
+			self.animacionIzquierda(imagenes_izquierda,self)
 		}
 	}
 }
