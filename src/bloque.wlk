@@ -6,5 +6,4 @@ class Bloque{
 	var property image = "muro.png"
 	var property position = game.at(12,66)
 	
-	
 }

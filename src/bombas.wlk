@@ -19,6 +19,7 @@ class Bomba{
 				game.removeTickEvent("explosion")
 				game.removeVisual(self)
 				bomber.resetBomba()	//resetea la bomba del personaje
+				
 			}
 		})
 		

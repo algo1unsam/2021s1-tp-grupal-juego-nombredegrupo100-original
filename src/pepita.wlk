@@ -33,11 +33,26 @@ object bomber inherits Animados {		//hereda de animados las funciones de animaci
 		if (cantidadBomba > 0 and not enMovimiento){
 			cantidadBomba -= 1
 			const bomba = new Bomba(position = self.position())			//crea un objeto bomba en la posicion actual de personaje
+			
+			self.collisionBomba( bomba.position() )
 			game.addVisual(bomba)				//lo pone en el tablero
 			game.removeVisual(self)				//se remueve a si mismo
 			game.addVisual(self)				// y se vuelve a poner en el tablero, esto es para que visualmente el bomber quede arriba de la bomba y no al reves
 			bomba.iniciarExplosion()			//inicia la explosion de la bomba
+			
 		}
+	}
+	
+	method collisionBomba(posicionDeBomba){
+		var i = 0
+		bloques_prohibidos.add( posicionDeBomba )
+			
+		game.onTick(300,"contador_bomba",{
+			i += 1
+			if(i > 6){
+				bloques_prohibidos.remove( posicionDeBomba )
+				game.removeTickEvent("contador_bomba")}
+		})
 	}
 	
 	method moverseArriba(){						//metodos de movimiento del personaje
