@@ -9,4 +9,7 @@ object configuracion {				//configuracion de las teclas
 		keyboard.down().onPressDo({ bomber.moverseAbajo()})
 		keyboard.space().onPressDo({ bomber.ponerBomba()})		//por ahora, con espacio se pone una bomba
 	}
+		method configurarCollision(){
+			game.whenCollideDo(bomber,{ algo => algo.collisionCon(bomber)})
+		}
 }

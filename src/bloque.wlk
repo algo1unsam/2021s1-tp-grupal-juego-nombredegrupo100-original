@@ -6,4 +6,7 @@ class Bloque{
 	var property image = "muro.png"
 	var property position = game.at(12,66)
 	
+	method collisionCon(objeto){game.say(objeto,"Colisiono")}
+		
+	
 }

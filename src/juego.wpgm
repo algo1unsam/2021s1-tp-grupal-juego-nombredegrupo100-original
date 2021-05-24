@@ -17,5 +17,6 @@ program juego {				//programa del juego principal
 	game.cellSize(10)				// tamaño de celda 10 pixeles para que no quede la pantalla tan grande
 	game.boardGround("fondo.png")	//fondo del tablero
 	configuracion.configurarTeclas()//configura todas las teclas
+	configuracion.configurarCollision()
 	game.start()
 }

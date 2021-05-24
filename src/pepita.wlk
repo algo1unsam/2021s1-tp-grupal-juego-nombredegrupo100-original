@@ -43,13 +43,13 @@ object bomber inherits Animados {		//hereda de animados las funciones de animaci
 		}
 	}
 	
-	method collisionBomba(posicionDeBomba){
+	method collisionBomba(posicionDeBomba){ // Metodo temporal
 		var i = 0
 		bloques_prohibidos.add( posicionDeBomba )
 			
 		game.onTick(300,"contador_bomba",{
 			i += 1
-			if(i > 6){
+			if(i > 5){
 				bloques_prohibidos.remove( posicionDeBomba )
 				game.removeTickEvent("contador_bomba")}
 		})
