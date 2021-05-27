@@ -1,22 +1,17 @@
 import wollok.game.*
-import pepita.*
 import objects.*
-import animados.*
-import bloque.*
+import Padre.*
+import bomber.*
 
 program juego {				//programa del juego principal
 
 	game.title("Bomberman")
 	
-	const bloque1 = new Bloque()
-	
-	game.addVisual(bloque1)			// esto esta de prueba por ahora, para lo otros bloques rompibles
 	game.addVisual(bomber)
-	game.height(13*6)				//numero de celdas 13*6 se multiplica x6 para las animaciones
-	game.width(15*6)				//numero de celdas 15*6 se multiplica x6 para las animaciones
-	game.cellSize(10)				// tamaño de celda 10 pixeles para que no quede la pantalla tan grande
-	game.boardGround("fondo.png")	//fondo del tablero
-	configuracion.configurarTeclas()//configura todas las teclas
-	configuracion.configurarCollision()
+	game.height(13*6)					//numero de celdas 13*6 se multiplica x6 para las animaciones
+	game.width(15*6)					//numero de celdas 15*6 se multiplica x6 para las animaciones
+	game.cellSize(10)					// tamaño de celda 10 pixeles para que no quede la pantalla tan grande
+	game.boardGround("fondo.png")		//fondo del tablero
+	configuracion.configurarTeclas()	//configura todas las teclas
 	game.start()
 }

@@ -1,5 +1,7 @@
-import pepita.*
+import Padre.*
 import wollok.game.*
+import bomber.*
+
 
 object configuracion {				//configuracion de las teclas
 		method configurarTeclas() {
