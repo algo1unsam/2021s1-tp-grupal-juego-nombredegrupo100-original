@@ -104,6 +104,13 @@ class Bomba inherits Elementos {
 		})
 	}
 	
+//metodo para la colision con bomber
+
+	override method colisionCon(objeto){
+		
+	}
+	
+	
 }
 
 //Clase Fuego, clase del fuego de la bomba
@@ -118,6 +125,10 @@ class Fuego inherits ElementosAnimadosSinMovimiento {
 //metodo que inicia el apagado del fuego, usa el metodo heredado animacionFija
 	method apagarFuego() {
 		self.animacionFija(velocidad,imagenesExplosion,self)
+	}
+	
+	override method colisionCon(objeto){
+		objeto.destruccion()
 	}
 	
 }

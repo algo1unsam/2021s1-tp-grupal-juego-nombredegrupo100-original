@@ -83,6 +83,8 @@ object bomber inherits ElementosAnimadosMovibles {
 		}
 	}
 							//metodo para moverse a la derecha
+	override method colisionCon(objeto){}
+
 	method ponerBomba(){
 		if (cantidadBomba > 0 and not enMovimiento){
 			cantidadBomba -= 1
