@@ -25,14 +25,24 @@ object bomber inherits ElementosAnimadosMovibles {
 							//lista de imagenes para la animacion de derecha
 	const imagenesIzquierda = ["bomber_izquierda1.png","bomber_izquierda2.png","bomber_izquierda.png","bomber_izquierda3.png","bomber_izquierda4.png","bomber_izquierda.png"]
 							//lista de imagenes para la animacion de izquierda	
-	const imagenesMuerte = []
+	const imagenesMuerte = ["bomber_death1.png","bomber_death2.png","bomber_death3.png","bomber_death4.png","bomber_death5.png"]
 							//lista de imagenes para la animacion de muerte (work in progress)
 							
 //########################################################################################################					
 							
 	override method destruccion(){
-		self.animacionMuerte(imagenesMuerte,self)
-		super()
+		
+			var i = 0
+			game.onTick(300,"F",{
+				
+				self.image(imagenesMuerte.get(i))
+				i += 1
+				
+				if (i > 4){
+					game.removeVisual(self)
+					game.removeTickEvent("F")
+				}
+			})
 	}
 							//metodo de destruccion, overridea al original, ejecuta la animacion y se elimina el visual
 	override method condicionParaMoverseArriba(){

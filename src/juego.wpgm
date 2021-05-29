@@ -7,7 +7,7 @@ program juego {				//programa del juego principal
 
 	game.title("Bomberman")
 	
-	creador.creacionBloquesNivel1()
+	//creador.creacionBloquesNivel1()
 	
 	game.addVisual(bomber)
 	game.height(13*6)					//numero de celdas 13*6 se multiplica x6 para las animaciones

@@ -14,5 +14,8 @@ object configuracion {				//configuracion de las teclas
 	
 		method configurarColision(){
 			game.whenCollideDo(bomber,{ algo => algo.colisionCon(bomber)})
+			//game.whenCollideDo(enemigo,{ algo => algo.colisionCon(enemigo)})
 		}
+		
+		
 }

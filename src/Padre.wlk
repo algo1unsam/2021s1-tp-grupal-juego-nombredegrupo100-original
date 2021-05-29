@@ -149,6 +149,9 @@ class Bloque inherits ElementosAnimadosSinMovimiento {
 //Clase enemigo, clase de los enemigos
 class Enemigo inherits ElementosMovibles {
 
+	var property image = "mentaGranizada.png"
+	const property position
+	
 	override method destruccion(){
 		super()
 	}	
