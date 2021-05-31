@@ -7,14 +7,13 @@ program juego {				//programa del juego principal
 
 	game.title("Bomberman")
 	
-	//creador.creacionBloquesNivel1()
+	creador.creacionBloquesNivel1()
 	
 	game.addVisual(bomber)
-	game.height(13*6)					//numero de celdas 13*6 se multiplica x6 para las animaciones
-	game.width(15*6)					//numero de celdas 15*6 se multiplica x6 para las animaciones
+	game.height(13*6)					// numero de celdas 13*6 se multiplica x6 para las animaciones
+	game.width(15*6)					// numero de celdas 15*6 se multiplica x6 para las animaciones
 	game.cellSize(10)					// tamaño de celda 10 pixeles para que no quede la pantalla tan grande
-	game.boardGround("fondo.png")		//fondo del tablero
-	configuracion.configurarTeclas()	//configura todas las teclas
-	configuracion.configurarColision()  //configura las colisiones
+	game.boardGround("fondo.png")		// fondo del tablero
+	configuracion.configurar()			// configura todas las teclas
 	game.start()
 }
