@@ -13,7 +13,4 @@ program juego {				//programa del juego principal
 	fondoMenu.configurar()				// configura todas las teclas
 	game.addVisual(fondoMenu)	
 	game.start()
-	
-	
-	
 }

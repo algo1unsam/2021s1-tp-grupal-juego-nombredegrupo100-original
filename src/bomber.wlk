@@ -127,6 +127,7 @@ object bomberSinAnimaciones inherits ElementosMovibles {
 //########################################################################################################					
 							
 	override method destruccion(){
+		self.enMovimiento(true)
 		var i = 0
 		game.onTick(300,"Press F to pay respect",{
 			
