@@ -31,38 +31,27 @@ object bomber inherits ElementosAnimadosMovibles {
 //########################################################################################################					
 							
 	override method destruccion(){
-		
-			var i = 0
-			game.onTick(300,"F",{
-				
-				self.image(imagenesMuerte.get(i))
-				i += 1
-				
-				if (i > 4){
-					game.removeVisual(self)
-					game.removeTickEvent("F")
-				}
-			})
+		self.animacionMuerte(imagenesMuerte,self)
 	}
 							//metodo de destruccion, overridea al original, ejecuta la animacion y se elimina el visual
 	override method condicionParaMoverseArriba(){
 		const destino = self.position().up(6)
-		return (destino.y() <=  66 and not bloquesProhibidos.contains(destino) and not enMovimiento)
+		return (destino.y() <=  66 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino) and not enMovimiento)
 	}
 							//condicion para moverse arriba
 	override method condicionParaMoverseAbajo(){
 		const destino = self.position().down(6)
-		return (destino.y() >= 6 and not bloquesProhibidos.contains(destino) and not enMovimiento)
+		return (destino.y() >= 6 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino) and not enMovimiento)
 	}
 							//condicion para moverse abajo
 	override method condicionParaMoverseIzquierda(){
 		const destino = self.position().left(6)
-		return (destino.x() >= 6 and not bloquesProhibidos.contains(destino) and not enMovimiento)
+		return (destino.x() >= 6 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino) and not enMovimiento)
 	}
 							//condicion para moverse a la izquierda
 	override method condicionParaMoverseDerecha(){
 		const destino = self.position().right(6)
-		return (destino.x() <= 13*6 and not bloquesProhibidos.contains(destino) and not enMovimiento)
+		return (destino.x() <= 13*6 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino) and not enMovimiento)
 	}
 							//condicion para moverse a la derecha
 	override method moverseArriba(){
@@ -98,7 +87,7 @@ object bomber inherits ElementosAnimadosMovibles {
 	method ponerBomba(){
 		if (cantidadBomba > 0 and not enMovimiento){
 			cantidadBomba -= 1
-			bloquesProhibidos.add(self.position())
+			game.getObjectsIn(game.origin()).first().bloquesProhibidos().add(self.position())
 			
 			const bomba = new Bomba(position = self.position(),rango = rangoDeBombas)//crea un objeto bomba en la posicion actual de personaje
 			game.addVisual(bomba)			//lo pone en el tablero
@@ -109,8 +98,128 @@ object bomber inherits ElementosAnimadosMovibles {
 	}
 							//metodo para poner una bomba
 	method reiniciarBomba(posicion){
-		bloquesProhibidos.remove(posicion)
+		game.getObjectsIn(game.origin()).first().bloquesProhibidos().remove(posicion)
 		cantidadBomba += 1
 	}
 							//metodo para reiniciar la cantidad de bombas
 }
+
+
+//##########################################################################################################
+
+//Objeto bomber pero sin animaciones, hereda de elementos movibles, solo puede hacer la animacion de muerte
+object bomberSinAnimaciones inherits ElementosMovibles {
+	
+	var property image = "bomber.png"		//imagen de inicio del bomberman
+	
+	var property position = game.at(6,66)	//posicion de inicio del bomberman
+	
+	var property enMovimiento = false		//flag de movimiento
+	
+	var property velocidad = 300				//velocidad de movimiento del personaje
+	
+	var property cantidadBomba = 1			//cantidad de bombas del personaje
+	
+	var property rangoDeBombas = 1  		//rango de las bombas del personaje
+	
+	const imagenesMuerte = ["bomber_death1.png","bomber_death2.png","bomber_death3.png","bomber_death4.png","bomber_death5.png"]
+							
+//########################################################################################################					
+							
+	override method destruccion(){
+		var i = 0
+		game.onTick(300,"Press F to pay respect",{
+			
+			if(i > imagenesMuerte.size() - 1){
+				game.clear()
+			} 
+			else{
+				self.image(imagenesMuerte.get(i))
+				i += 1
+			}
+		})
+		game.schedule(4000,{game.clear()})		
+	}
+							//metodo de destruccion, overridea al original, ejecuta la animacion y se elimina el visual
+	override method condicionParaMoverseArriba(){
+		const destino = self.position().up(6)
+		return (destino.y() <=  66 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino) and not enMovimiento)
+	}
+							//condicion para moverse arriba
+	override method condicionParaMoverseAbajo(){
+		const destino = self.position().down(6)
+		return (destino.y() >= 6 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino) and not enMovimiento)
+	}
+							//condicion para moverse abajo
+	override method condicionParaMoverseIzquierda(){
+		const destino = self.position().left(6)
+		return (destino.x() >= 6 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino) and not enMovimiento)
+	}
+							//condicion para moverse a la izquierda
+	override method condicionParaMoverseDerecha(){
+		const destino = self.position().right(6)
+		return (destino.x() <= 13*6 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino) and not enMovimiento)
+	}
+							//condicion para moverse a la derecha
+	override method moverseArriba(){
+		self.image("bomber_atras.png")
+		if(self.condicionParaMoverseArriba()){
+			self.enMovimiento(true)
+			
+			self.position(self.position().up(6))
+			game.schedule(velocidad,{self.enMovimiento(false)})
+		}
+	}
+							//metodo para moverse arriba
+	override method moverseAbajo(){
+		self.image("bomber.png")
+		if(self.condicionParaMoverseAbajo()){
+			self.enMovimiento(true)
+			
+			self.position(self.position().down(6))
+			game.schedule(velocidad,{self.enMovimiento(false)})
+		}
+	}
+							//metodo para moverse abajo
+	override method moverseIzquierda(){
+		self.image("bomber_izquierda.png")
+		if(self.condicionParaMoverseIzquierda()){
+			self.enMovimiento(true)
+			
+			self.position(self.position().left(6))
+			game.schedule(velocidad,{self.enMovimiento(false)})
+		}
+	}
+							//metodo para moverse a la izquierda
+	override method moverseDerecha(){
+		self.image("bomber_derecha.png")
+		if(self.condicionParaMoverseDerecha()){
+			self.enMovimiento(true)
+			
+			self.position(self.position().right(6))
+			game.schedule(velocidad,{self.enMovimiento(false)})
+		}
+	}
+							//metodo para moverse a la derecha
+	override method colisionCon(objeto){}
+
+	method ponerBomba(){
+		if (cantidadBomba > 0 and not enMovimiento){
+			cantidadBomba -= 1
+			game.getObjectsIn(game.origin()).first().bloquesProhibidos().add(self.position())
+			
+			const bomba = new Bomba(position = self.position(),rango = rangoDeBombas)//crea un objeto bomba en la posicion actual de personaje
+			game.addVisual(bomba)			//lo pone en el tablero
+			game.removeVisual(self)			//se remueve a si mismo
+			game.addVisual(self)			// y se vuelve a poner en el tablero, esto es para que visualmente el bomber quede arriba de la bomba y no al reves
+			bomba.iniciarExplosion()		//inicia la explosion de la bomba
+		}
+	}
+							//metodo para poner una bomba
+	method reiniciarBomba(posicion){
+		game.getObjectsIn(game.origin()).first().bloquesProhibidos().remove(posicion)
+		cantidadBomba += 1
+	}
+							//metodo para reiniciar la cantidad de bombas
+}
+

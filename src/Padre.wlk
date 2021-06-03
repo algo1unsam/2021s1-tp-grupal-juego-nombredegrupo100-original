@@ -3,16 +3,7 @@ import bomber.*
 
 //Clase padre de todos los elementos, contienen algunas variables escenciales para cada objeto
 class Elementos {
-
-//lista con todos los bloques prohibidos 
-	var property bloquesProhibidos = #{
-		game.at(12,60),game.at(24,60),game.at(36,60),game.at(48,60),game.at(60,60),game.at(72,60),
-		game.at(12,48),game.at(24,48),game.at(36,48),game.at(48,48),game.at(60,48),game.at(72,48),
-		game.at(12,36),game.at(24,36),game.at(36,36),game.at(48,36),game.at(60,36),game.at(72,36),
-		game.at(12,24),game.at(24,24),game.at(36,24),game.at(48,24),game.at(60,24),game.at(72,24),
-		game.at(12,12),game.at(24,12),game.at(36,12),game.at(48,12),game.at(60,12),game.at(72,12)
-		}
-
+	
 //metodo de destrucion de un elemento
 	method destruccion(){
 		game.removeVisual(self)
@@ -45,8 +36,18 @@ class ElementosMovibles inherits Elementos {
 class ElementosAnimadosMovibles inherits ElementosMovibles {
 	
 	method animacionMuerte(imagenes,objeto){
-
-	}
+		var i = 0
+		game.onTick(300,"Press F to pay respect",{
+			
+			if(i > imagenes.size() - 1){
+				game.clear()
+			} 
+			else{
+				objeto.image(imagenes.get(i))
+				i += 1
+			}
+		})
+}
 	
 	method animacionArriba(velocidad,imagenes,objeto){
 		var i = 0
@@ -119,7 +120,7 @@ class ElementosAnimadosSinMovimiento inherits Elementos{
 				objeto.image(imagenes.get(i))
 				i += 1
 			}
-		})		
+		})
 	}
 }
 
@@ -133,7 +134,7 @@ class Bloque inherits ElementosAnimadosSinMovimiento {
 	const property position 
 	const property image = "muro.png"	
 	//const imagenesDestruccion = []
-	const velocidad = 50
+	const velocidadDeDestruccion = 50
 	
 	override method destruccion(){
 		//self.animacionFija(velocidad,imagenesDestruccion,self)
@@ -143,111 +144,6 @@ class Bloque inherits ElementosAnimadosSinMovimiento {
 	override method colisionCon(objeto){
 		
 	}	
-	
 }
-
-//Clase enemigo, clase de los enemigos
-class Enemigo inherits ElementosMovibles {
-
-	var property image = "mentaGranizada.png"
-	var property position
-	var property flagVida = true
-	
-	override method destruccion(){
-		self.flagVida(false)
-		game.removeVisual(self)
-		
-	}
-	
-	override method condicionParaMoverseArriba(){
-		const destino = self.position().up(6)
-		return destino.y() <=  66 and not bloquesProhibidos.contains(destino)
-	}
-	
-	override method condicionParaMoverseAbajo(){
-		const destino = self.position().down(6)
-		return destino.y() >= 6 and not bloquesProhibidos.contains(destino) 
-	}
-	
-	override method condicionParaMoverseIzquierda(){
-		const destino = self.position().left(6)
-		return destino.x() >=  6 and not bloquesProhibidos.contains(destino)
-	}
-	
-	override method condicionParaMoverseDerecha(){
-		const destino = self.position().right(6)
-		return destino.x() <= 13*6 and not bloquesProhibidos.contains(destino)		
-	}
-	
-	override method moverseArriba(){
-		self.position(self.position().up(6))
-	}
-	override method moverseAbajo(){
-		self.position(self.position().down(6))
-	}
-	override method moverseIzquierda(){
-		self.position(self.position().left(6))
-	}
-	override method moverseDerecha(){
-		self.position(self.position().right(6))
-	}
-	
-	method meMuevoSolo(direccion){
-		
-		if (direccion == 1 and self.condicionParaMoverseArriba()){self.moverseArriba()}
-		if (direccion == 2 and self.condicionParaMoverseAbajo()){self.moverseAbajo()}
-		if (direccion == 3 and self.condicionParaMoverseIzquierda()){self.moverseIzquierda()}
-		if (direccion == 4 and self.condicionParaMoverseDerecha()){self.moverseDerecha()}
-	}
-	
-	override method colisionCon(objeto){
-		
-	}	
-	
-}
-
 
 //#######################################################################################################
-
-object creador{
-	
-	const posicionesNivel1=#{
-							game.at(18,66),game.at(24,66),game.at(30,66),game.at(36,66),game.at(42,66),game.at(48,66),game.at(54,66),game.at(60,66),game.at(66,66),
-							game.at(18,60),game.at(30,60),game.at(54,60),game.at(66,60),
-							game.at(6,54),game.at(12,54),game.at(30,54),game.at(36,54),game.at(42,54),game.at(54,54),game.at(60,54),game.at(78,54),
-							game.at(30,48),game.at(42,48),game.at(54,48),game.at(66,48),game.at(78,48),
-							game.at(6,42),game.at(12,42),game.at(24,42),game.at(42,42),game.at(48,42),game.at(54,42),game.at(60,42),game.at(72,42),game.at(78,42),
-							game.at(6,36),game.at(18,36),game.at(30,36),game.at(42,36),game.at(54,36),game.at(66,36),game.at(78,36),
-							game.at(6,30),game.at(12,30),game.at(18,30),game.at(24,30),game.at(30,30),game.at(36,30),game.at(42,30),game.at(60,30),game.at(66,30),game.at(72,30),game.at(78,30),
-							game.at(6,24),game.at(18,24),game.at(54,24),game.at(66,24),game.at(78,24),
-							game.at(6,18),game.at(12,18),game.at(24,18),game.at(30,18),game.at(36,18),game.at(48,18),game.at(54,18),game.at(60,18),game.at(66,18),game.at(72,18),game.at(78,18),
-							game.at(18,12),game.at(30,12),game.at(42,12),
-							game.at(18,6),game.at(24,6),game.at(30,6),game.at(36,6),game.at(42,6),game.at(48,6),game.at(54,6),game.at(60,6),game.at(66,6)
-							}
-	
-	method creacionBloquesNivel1(){
-		const enemigo = new Enemigo(position = game.at(66,6))
-		game.addVisual(enemigo)
-		
-		game.whenCollideDo(enemigo,{ algo => algo.colisionCon(enemigo)})
-		
-		//posicionesNivel1.forEach({posicion =>
-			
-			//const bloque = new Bloque(position = posicion)
-			//game.addVisual(bloque)
-			//game.whenCollideDo(bloque,{ algo => algo.colisionCon(bloque)})
-			
-		//})
-		 
-		game.onTick(2000,"meMuevoChe",{
-			
-			enemigo.meMuevoSolo((1..4).anyOne())
-			
-			if (not enemigo.flagVida()){
-				game.removeTickEvent("meMuevoChe")}
-		})
-	}
-	
-}
-
-

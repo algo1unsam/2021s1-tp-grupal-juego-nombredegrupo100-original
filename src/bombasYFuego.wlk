@@ -14,22 +14,22 @@ class Bomba inherits Elementos {
 //Metodos de condicion, estos se usan para la extension del fuego
 	method condicionArriba(n){
 		const destino = self.position().up(6 * n)
-		return destino.y() <=  66 and not bloquesProhibidos.contains(destino)
+		return destino.y() <=  66 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino)
 	}
 	
 	method condicionAbajo(n){
 		const destino = self.position().down(6 * n)
-		return destino.y() >= 6 and not bloquesProhibidos.contains(destino) 
+		return destino.y() >= 6 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino) 
 	}
 	
 	method condicionIzquierda(n){
 		const destino = self.position().left(6 * n)
-		return destino.x() >=  6 and not bloquesProhibidos.contains(destino)
+		return destino.x() >=  6 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino)
 	}
 	
 	method condicionDerecha(n){
 		const destino = self.position().right(6 * n)
-		return destino.x() <= 13*6 and not bloquesProhibidos.contains(destino)		
+		return destino.x() <= 13*6 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino)		
 	}
 	
 //###############################################################################################	
@@ -42,7 +42,12 @@ class Bomba inherits Elementos {
 			if(i > 1){
 				game.removeVisual(self)
 				self.explotar()								//se encarga del fuego
-				bomber.reiniciarBomba(self.position())
+				
+				if(game.hasVisual(bomber)){
+					bomber.reiniciarBomba(self.position())
+				}else{
+					bomberSinAnimaciones.reiniciarBomba(self.position())
+				}
 				game.removeTickEvent("iniciarExplosion")
 			} 
 			else{
@@ -109,8 +114,7 @@ class Bomba inherits Elementos {
 	override method colisionCon(objeto){
 		
 	}
-	
-	
+
 }
 
 //Clase Fuego, clase del fuego de la bomba
