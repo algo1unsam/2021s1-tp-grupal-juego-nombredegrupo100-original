@@ -134,7 +134,8 @@ class Bloque inherits ElementosAnimadosSinMovimiento {
 	const property position 
 	const property image = "muro.png"	
 	//const imagenesDestruccion = []
-	const velocidadDeDestruccion = 50
+	
+	method esAtravesable(){return false}
 	
 	override method destruccion(){
 		//self.animacionFija(velocidad,imagenesDestruccion,self)

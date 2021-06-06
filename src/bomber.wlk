@@ -13,9 +13,9 @@ object bomber inherits ElementosAnimadosMovibles {
 	
 	var property velocidad = 50				//velocidad de movimiento del personaje
 	
-	var property cantidadBomba = 1			//cantidad de bombas del personaje
+	var property cantidadBomba = 2			//cantidad de bombas del personaje
 	
-	var property rangoDeBombas = 1  		//rango de las bombas del personaje
+	var property rangoDeBombas = 2  		//rango de las bombas del personaje
 	
 	const imagenesArriba = ["bomber_arriba1.png","bomber_arriba2.png","bomber_atras.png","bomber_arriba3.png","bomber_arriba4.png","bomber_atras.png"]
 							//lista de imagenes para la animacion de arriba
@@ -30,28 +30,38 @@ object bomber inherits ElementosAnimadosMovibles {
 							
 //########################################################################################################					
 							
+	method esAtravesable(){return true}
+	
 	override method destruccion(){
 		self.animacionMuerte(imagenesMuerte,self)
 	}
 							//metodo de destruccion, overridea al original, ejecuta la animacion y se elimina el visual
 	override method condicionParaMoverseArriba(){
 		const destino = self.position().up(6)
-		return (destino.y() <=  66 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino) and not enMovimiento)
+		const objetosDeDestino = game.getObjectsIn(destino)
+		const fondo = game.getObjectsIn(game.origin()).first()
+		return (destino.y() <=  66 and not fondo.bloquesProhibidos().contains(destino) and objetosDeDestino.all({objeto => objeto.esAtravesable()}) and not enMovimiento)
 	}
 							//condicion para moverse arriba
 	override method condicionParaMoverseAbajo(){
 		const destino = self.position().down(6)
-		return (destino.y() >= 6 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino) and not enMovimiento)
+		const objetosDeDestino = game.getObjectsIn(destino)
+		const fondo = game.getObjectsIn(game.origin()).first()
+		return (destino.y() >= 6 and not fondo.bloquesProhibidos().contains(destino) and objetosDeDestino.all({objeto => objeto.esAtravesable()}) and not enMovimiento)
 	}
 							//condicion para moverse abajo
 	override method condicionParaMoverseIzquierda(){
 		const destino = self.position().left(6)
-		return (destino.x() >= 6 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino) and not enMovimiento)
+		const objetosDeDestino = game.getObjectsIn(destino)
+		const fondo = game.getObjectsIn(game.origin()).first()
+		return (destino.x() >= 6 and not fondo.bloquesProhibidos().contains(destino) and objetosDeDestino.all({objeto => objeto.esAtravesable()}) and not enMovimiento)
 	}
 							//condicion para moverse a la izquierda
 	override method condicionParaMoverseDerecha(){
 		const destino = self.position().right(6)
-		return (destino.x() <= 13*6 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino) and not enMovimiento)
+		const objetosDeDestino = game.getObjectsIn(destino)
+		const fondo = game.getObjectsIn(game.origin()).first()
+		return (destino.x() <= 13*6 and not fondo.bloquesProhibidos().contains(destino) and objetosDeDestino.all({objeto => objeto.esAtravesable()}) and not enMovimiento)
 	}
 							//condicion para moverse a la derecha
 	override method moverseArriba(){
@@ -87,7 +97,6 @@ object bomber inherits ElementosAnimadosMovibles {
 	method ponerBomba(){
 		if (cantidadBomba > 0 and not enMovimiento){
 			cantidadBomba -= 1
-			game.getObjectsIn(game.origin()).first().bloquesProhibidos().add(self.position())
 			
 			const bomba = new Bomba(position = self.position(),rango = rangoDeBombas)//crea un objeto bomba en la posicion actual de personaje
 			game.addVisual(bomba)			//lo pone en el tablero
@@ -116,15 +125,17 @@ object bomberSinAnimaciones inherits ElementosMovibles {
 	
 	var property enMovimiento = false		//flag de movimiento
 	
-	var property velocidad = 300				//velocidad de movimiento del personaje
+	var property velocidad = 1				//velocidad de movimiento del personaje
 	
-	var property cantidadBomba = 1			//cantidad de bombas del personaje
+	var property cantidadBomba = 2			//cantidad de bombas del personaje
 	
-	var property rangoDeBombas = 1  		//rango de las bombas del personaje
+	var property rangoDeBombas = 2  		//rango de las bombas del personaje
 	
 	const imagenesMuerte = ["bomber_death1.png","bomber_death2.png","bomber_death3.png","bomber_death4.png","bomber_death5.png"]
 							
 //########################################################################################################					
+			
+	method esAtravesable(){return true}
 							
 	override method destruccion(){
 		self.enMovimiento(true)
@@ -144,22 +155,30 @@ object bomberSinAnimaciones inherits ElementosMovibles {
 							//metodo de destruccion, overridea al original, ejecuta la animacion y se elimina el visual
 	override method condicionParaMoverseArriba(){
 		const destino = self.position().up(6)
-		return (destino.y() <=  66 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino) and not enMovimiento)
+		const objetosDeDestino = game.getObjectsIn(destino)
+		const fondo = game.getObjectsIn(game.origin()).first()
+		return (destino.y() <=  66 and not fondo.bloquesProhibidos().contains(destino) and objetosDeDestino.all({objeto => objeto.esAtravesable()}) and not enMovimiento)
 	}
 							//condicion para moverse arriba
 	override method condicionParaMoverseAbajo(){
 		const destino = self.position().down(6)
-		return (destino.y() >= 6 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino) and not enMovimiento)
+		const objetosDeDestino = game.getObjectsIn(destino)
+		const fondo = game.getObjectsIn(game.origin()).first()
+		return (destino.y() >= 6 and not fondo.bloquesProhibidos().contains(destino) and objetosDeDestino.all({objeto => objeto.esAtravesable()}) and not enMovimiento)
 	}
 							//condicion para moverse abajo
 	override method condicionParaMoverseIzquierda(){
 		const destino = self.position().left(6)
-		return (destino.x() >= 6 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino) and not enMovimiento)
+		const objetosDeDestino = game.getObjectsIn(destino)
+		const fondo = game.getObjectsIn(game.origin()).first()
+		return (destino.x() >= 6 and not fondo.bloquesProhibidos().contains(destino) and objetosDeDestino.all({objeto => objeto.esAtravesable()}) and not enMovimiento)
 	}
 							//condicion para moverse a la izquierda
 	override method condicionParaMoverseDerecha(){
 		const destino = self.position().right(6)
-		return (destino.x() <= 13*6 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino) and not enMovimiento)
+		const objetosDeDestino = game.getObjectsIn(destino)
+		const fondo = game.getObjectsIn(game.origin()).first()
+		return (destino.x() <= 13*6 and not fondo.bloquesProhibidos().contains(destino) and objetosDeDestino.all({objeto => objeto.esAtravesable()}) and not enMovimiento)
 	}
 							//condicion para moverse a la derecha
 	override method moverseArriba(){
@@ -207,7 +226,7 @@ object bomberSinAnimaciones inherits ElementosMovibles {
 	method ponerBomba(){
 		if (cantidadBomba > 0 and not enMovimiento){
 			cantidadBomba -= 1
-			game.getObjectsIn(game.origin()).first().bloquesProhibidos().add(self.position())
+			
 			
 			const bomba = new Bomba(position = self.position(),rango = rangoDeBombas)//crea un objeto bomba en la posicion actual de personaje
 			game.addVisual(bomba)			//lo pone en el tablero

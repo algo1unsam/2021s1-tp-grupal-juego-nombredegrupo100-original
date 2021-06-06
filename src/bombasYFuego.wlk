@@ -12,6 +12,9 @@ class Bomba inherits Elementos {
 	var property rango = 1
 
 //Metodos de condicion, estos se usan para la extension del fuego
+
+	method esAtravesable(){return false}
+
 	method condicionArriba(n){
 		const destino = self.position().up(6 * n)
 		return destino.y() <=  66 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino)
@@ -125,6 +128,8 @@ class Fuego inherits ElementosAnimadosSinMovimiento {
 	const property imagenesExplosion = ["bomba4.png","bomba5.png","bomba6.png"]
 	const property velocidad = 100
 	
+	
+	method esAtravesable(){return true}
 	
 //metodo que inicia el apagado del fuego, usa el metodo heredado animacionFija
 	method apagarFuego() {

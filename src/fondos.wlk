@@ -3,7 +3,7 @@ import wollok.game.*
 import bomber.*
 import creador.*
 
-object fondoMenu {			//fondo del menu principal
+object fondoMenu {		//fondo del menu principal
 
 	var property animaciones = true
 	
@@ -11,13 +11,15 @@ object fondoMenu {			//fondo del menu principal
 	method position() = game.origin()
 	
 	method configurar() {
-		keyboard.num(1).onPressDo{ primerNivel.iniciar(animaciones)}
+		keyboard.num(1).onPressDo{ nivel1.iniciar()}
 		keyboard.num(2).onPressDo{ game.stop()}
 		keyboard.num(0).onPressDo{ self.animaciones(false)}
 		}
 }
 
-object primerNivel {		//fondo del primer nivel
+class Niveles {		//fondo del primer nivel
+
+	var property contadorDeEnemigos
 
 //Bloque prohibidos del primer nivel
 	var property bloquesProhibidos = #{
@@ -28,23 +30,16 @@ object primerNivel {		//fondo del primer nivel
 		game.at(12,12),game.at(24,12),game.at(36,12),game.at(48,12),game.at(60,12),game.at(72,12)
 		}
 
-	method image() = "fondo.png"
+	method murioUnEnemigo(){
+		contadorDeEnemigos -= 1
+	}
+
 	method position() = game.origin()
 	
-	method iniciar(animaciones){
-		game.clear()
-		game.addVisual(self)
-		
-		//creador.creacionBloquesNivel1()
-		creador.creacionEnemigoNivel1()
-		if(animaciones){game.addVisual(bomber)}
-		else{game.addVisual(bomberSinAnimaciones)}
-		self.configurar(animaciones)
-			
-	}	
+	method iniciar()
 
-	method configurar(animaciones) {
-		if(animaciones){
+	method configurar() {
+		if(fondoMenu.animaciones()){
 			keyboard.left().onPressDo({ bomber.moverseIzquierda() })
 			keyboard.right().onPressDo({ bomber.moverseDerecha() })
 			keyboard.up().onPressDo({ bomber.moverseArriba()})
@@ -63,4 +58,83 @@ object primerNivel {		//fondo del primer nivel
 			game.whenCollideDo(bomberSinAnimaciones,{ algo => algo.colisionCon(bomberSinAnimaciones)})
 			}
 		}
+		
+	method ganar()
+	
+}
+
+object nivel1 inherits Niveles {
+	
+	method image() = "fondo.png"
+	
+	override method iniciar(){
+		game.clear()
+		game.addVisual(self)
+		
+		creador.creacionBloquesNivel1()
+		creador.creacionEnemigoNivel1()
+		
+		if(fondoMenu.animaciones()){game.addVisual(bomber)}
+		else{game.addVisual(bomberSinAnimaciones)}
+		self.configurar()	
+	}
+	
+	override method ganar(){
+		if(contadorDeEnemigos == 0){
+			nivel2.iniciar()
+		}
+	}	
+}
+
+object nivel2 inherits Niveles {
+	
+	method image() = "fondo2.png"
+	
+	override method iniciar(){
+		
+		if(fondoMenu.animaciones()){bomber.position(game.at(6,66))}
+		else{bomberSinAnimaciones.position(game.at(6,66))}
+		game.clear()
+		game.addVisual(self)
+		
+		creador.creacionBloquesNivel2()
+		creador.creacionEnemigoNivel2()
+		
+		if(fondoMenu.animaciones()){game.addVisual(bomber)}
+		else{game.addVisual(bomberSinAnimaciones)}
+		self.configurar()	
+	}
+	
+	override method ganar(){
+		if(contadorDeEnemigos == 0){
+			nivel3.iniciar()
+		}
+	}	
+}
+
+object nivel3 inherits Niveles {
+	
+	method image() = "fondo3.png"
+	
+	override method iniciar(){
+		
+		if(fondoMenu.animaciones()){bomber.position(game.at(6,66))}
+		else{bomberSinAnimaciones.position(game.at(6,66))}
+		
+		game.clear()
+		game.addVisual(self)
+		
+		creador.creacionBloquesNivel3()
+		creador.creacionEnemigoNivel3()
+		
+		if(fondoMenu.animaciones()){game.addVisual(bomber)}
+		else{game.addVisual(bomberSinAnimaciones)}
+		self.configurar()	
+	}
+	
+	override method ganar(){
+		if(contadorDeEnemigos == 0){
+			
+		}
+	}	
 }

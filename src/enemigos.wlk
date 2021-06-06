@@ -9,30 +9,46 @@ class Enemigo inherits ElementosMovibles {
 	var property position
 	var property flagVida = true
 	
+	method esAtravesable(){return true}
+	
 	override method destruccion(){
 		self.flagVida(false)
+		game.getObjectsIn(game.origin()).first().murioUnEnemigo()
+		game.removeTickEvent("Me muevo")
 		game.removeVisual(self)
-		
+		game.getObjectsIn(game.origin()).first().ganar()
 	}
 	
 	override method condicionParaMoverseArriba(){
 		const destino = self.position().up(6)
-		return destino.y() <=  66 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino) and game.getObjectsIn(destino).isEmpty()
+		const objetosDeDestino = game.getObjectsIn(destino)
+		const fondo = game.getObjectsIn(game.origin()).first()
+		
+		return destino.y() <=  66 and not fondo.bloquesProhibidos().contains(destino) and objetosDeDestino.all({objeto => objeto.esAtravesable()})
 	}
 	
 	override method condicionParaMoverseAbajo(){
 		const destino = self.position().down(6)
-		return destino.y() >= 6 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino) and game.getObjectsIn(destino).isEmpty()
+		const objetosDeDestino = game.getObjectsIn(destino)
+		const fondo = game.getObjectsIn(game.origin()).first()
+		
+		return destino.y() >= 6 and not fondo.bloquesProhibidos().contains(destino) and objetosDeDestino.all({objeto => objeto.esAtravesable()})
 	}
 	
 	override method condicionParaMoverseIzquierda(){
 		const destino = self.position().left(6)
-		return destino.x() >=  6 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino) and game.getObjectsIn(destino).isEmpty()
+		const objetosDeDestino = game.getObjectsIn(destino)
+		const fondo = game.getObjectsIn(game.origin()).first()
+			
+		return destino.x() >=  6 and not fondo.bloquesProhibidos().contains(destino) and objetosDeDestino.all({objeto => objeto.esAtravesable()})
 	}
 	
 	override method condicionParaMoverseDerecha(){
 		const destino = self.position().right(6)
-		return destino.x() <= 13*6 and not game.getObjectsIn(game.origin()).first().bloquesProhibidos().contains(destino) and game.getObjectsIn(destino).isEmpty()	
+		const objetosDeDestino = game.getObjectsIn(destino)
+		const fondo = game.getObjectsIn(game.origin()).first()
+			
+		return destino.x() <= 13*6 and not fondo.bloquesProhibidos().contains(destino) and objetosDeDestino.all({objeto => objeto.esAtravesable()})
 	}
 	
 	override method moverseArriba(){
@@ -58,6 +74,11 @@ class Enemigo inherits ElementosMovibles {
 	
 	override method colisionCon(objeto){
 		objeto.destruccion()
-	}	
+	}
 	
+	method iniciarMovimiento(){
+		game.onTick(1000,"Me muevo",{
+			self.meMuevoSolo((1..4).anyOne())
+		})
+	}
 }
