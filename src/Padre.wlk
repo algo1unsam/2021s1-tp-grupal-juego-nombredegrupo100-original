@@ -129,18 +129,12 @@ class ElementosAnimadosSinMovimiento inherits Elementos{
 
 
 //Clase Bloque, clase de los bloques
-class Bloque inherits ElementosAnimadosSinMovimiento {
+class Bloque inherits Elementos {
 
 	const property position 
-	const property image = "muro.png"	
-	//const imagenesDestruccion = []
+	const property image = "bloque.png"	
 	
 	method esAtravesable(){return false}
-	
-	override method destruccion(){
-		//self.animacionFija(velocidad,imagenesDestruccion,self)
-		super()
-	}
 	
 	override method colisionCon(objeto){
 		

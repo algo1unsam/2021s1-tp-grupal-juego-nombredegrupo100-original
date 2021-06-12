@@ -81,7 +81,11 @@ object nivel1 inherits Niveles {
 	
 	override method ganar(){
 		if(contadorDeEnemigos == 0){
-			nivel2.iniciar()
+			game.schedule(5000,{
+				game.clear()
+				game.schedule(10000,{nivel2.iniciar()})
+			})
+			
 		}
 	}	
 }
@@ -92,8 +96,9 @@ object nivel2 inherits Niveles {
 	
 	override method iniciar(){
 		
-		if(fondoMenu.animaciones()){bomber.position(game.at(6,66))}
-		else{bomberSinAnimaciones.position(game.at(6,66))}
+		if(fondoMenu.animaciones()){bomber.position(game.at(6,6))}
+		else{bomberSinAnimaciones.position(game.at(6,6))}
+		
 		game.clear()
 		game.addVisual(self)
 		
@@ -107,7 +112,10 @@ object nivel2 inherits Niveles {
 	
 	override method ganar(){
 		if(contadorDeEnemigos == 0){
-			nivel3.iniciar()
+			game.schedule(5000,{
+				game.clear()
+				game.schedule(10000,{nivel3.iniciar()})
+			})
 		}
 	}	
 }
@@ -118,8 +126,8 @@ object nivel3 inherits Niveles {
 	
 	override method iniciar(){
 		
-		if(fondoMenu.animaciones()){bomber.position(game.at(6,66))}
-		else{bomberSinAnimaciones.position(game.at(6,66))}
+		if(fondoMenu.animaciones()){bomber.position(game.at(30,30))}
+		else{bomberSinAnimaciones.position(game.at(78,6))}
 		
 		game.clear()
 		game.addVisual(self)
@@ -134,7 +142,7 @@ object nivel3 inherits Niveles {
 	
 	override method ganar(){
 		if(contadorDeEnemigos == 0){
-			
+			game.say(self,"ganaste")
 		}
 	}	
 }

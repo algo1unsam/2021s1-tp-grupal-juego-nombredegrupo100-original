@@ -7,8 +7,8 @@ program juego {				//programa del juego principal
 
 	game.title("Bomberman")
 		
-	game.height(13*6)					// numero de celdas 13*6 se multiplica x6 para las animaciones 78
-	game.width(15*6)					// numero de celdas 15*6 se multiplica x6 para las animaciones 90
+	game.height(13*6)					// numero de celdas 13*6 se multiplica x6 para las animaciones (78)
+	game.width(15*6)					// numero de celdas 15*6 se multiplica x6 para las animaciones (90)
 	game.cellSize(10)					// tamaño de celda 10 pixeles para que no quede la pantalla tan grande	// fondo del tablero
 	fondoMenu.configurar()				// configura todas las teclas
 	game.addVisual(fondoMenu)	

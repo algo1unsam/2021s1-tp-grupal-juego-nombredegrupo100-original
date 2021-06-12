@@ -8,6 +8,7 @@ class Enemigo inherits ElementosMovibles {
 	var property image = "mentaGranizada.png"
 	var property position
 	var property flagVida = true
+	var property velocidad
 	
 	method esAtravesable(){return true}
 	
@@ -77,7 +78,7 @@ class Enemigo inherits ElementosMovibles {
 	}
 	
 	method iniciarMovimiento(){
-		game.onTick(1000,"Me muevo",{
+		game.onTick(velocidad,"Me muevo",{
 			self.meMuevoSolo((1..4).anyOne())
 		})
 	}

@@ -13,9 +13,9 @@ object bomber inherits ElementosAnimadosMovibles {
 	
 	var property velocidad = 50				//velocidad de movimiento del personaje
 	
-	var property cantidadBomba = 2			//cantidad de bombas del personaje
+	var property cantidadBomba = 1			//cantidad de bombas del personaje
 	
-	var property rangoDeBombas = 2  		//rango de las bombas del personaje
+	var property rangoDeBombas = 1  		//rango de las bombas del personaje
 	
 	const imagenesArriba = ["bomber_arriba1.png","bomber_arriba2.png","bomber_atras.png","bomber_arriba3.png","bomber_arriba4.png","bomber_atras.png"]
 							//lista de imagenes para la animacion de arriba
@@ -127,9 +127,9 @@ object bomberSinAnimaciones inherits ElementosMovibles {
 	
 	var property velocidad = 1				//velocidad de movimiento del personaje
 	
-	var property cantidadBomba = 2			//cantidad de bombas del personaje
+	var property cantidadBomba = 1			//cantidad de bombas del personaje
 	
-	var property rangoDeBombas = 2  		//rango de las bombas del personaje
+	var property rangoDeBombas = 1  		//rango de las bombas del personaje
 	
 	const imagenesMuerte = ["bomber_death1.png","bomber_death2.png","bomber_death3.png","bomber_death4.png","bomber_death5.png"]
 							
