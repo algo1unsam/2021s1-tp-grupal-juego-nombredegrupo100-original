@@ -1,6 +1,7 @@
 import Padre.*
 import wollok.game.*
 import bombasYFuego.*
+import fondos.*
 
 //Objeto bomber, objeto del personaje principal
 object bomber inherits ElementosAnimadosMovibles {
@@ -95,7 +96,7 @@ object bomber inherits ElementosAnimadosMovibles {
 	override method colisionCon(objeto){}
 
 	method ponerBomba(){
-		if (cantidadBomba > 0 and not enMovimiento){
+		if (cantidadBomba > 0 and not enMovimiento and game.getObjectsIn(self.position()).all({objeto=> objeto.esAtravesable()})){
 			cantidadBomba -= 1
 			
 			const bomba = new Bomba(position = self.position(),rango = rangoDeBombas)//crea un objeto bomba en la posicion actual de personaje
@@ -143,14 +144,13 @@ object bomberSinAnimaciones inherits ElementosMovibles {
 		game.onTick(300,"Press F to pay respect",{
 			
 			if(i > imagenesMuerte.size() - 1){
-				game.clear()
+				gameOver.iniciar()
 			} 
 			else{
 				self.image(imagenesMuerte.get(i))
 				i += 1
 			}
 		})
-		game.schedule(4000,{game.clear()})		
 	}
 							//metodo de destruccion, overridea al original, ejecuta la animacion y se elimina el visual
 	override method condicionParaMoverseArriba(){
@@ -224,7 +224,7 @@ object bomberSinAnimaciones inherits ElementosMovibles {
 	override method colisionCon(objeto){}
 
 	method ponerBomba(){
-		if (cantidadBomba > 0 and not enMovimiento){
+		if (cantidadBomba > 0 and not enMovimiento and game.getObjectsIn(self.position()).all({objeto=> objeto.esAtravesable()})){
 			cantidadBomba -= 1
 			
 			

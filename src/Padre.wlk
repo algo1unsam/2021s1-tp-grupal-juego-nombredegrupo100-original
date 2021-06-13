@@ -1,5 +1,6 @@
 import wollok.game.*
 import bomber.*
+import fondos.*
 
 //Clase padre de todos los elementos, contienen algunas variables escenciales para cada objeto
 class Elementos {
@@ -40,7 +41,7 @@ class ElementosAnimadosMovibles inherits ElementosMovibles {
 		game.onTick(300,"Press F to pay respect",{
 			
 			if(i > imagenes.size() - 1){
-				game.clear()
+				gameOver.iniciar()
 			} 
 			else{
 				objeto.image(imagenes.get(i))
