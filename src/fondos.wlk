@@ -163,10 +163,12 @@ object nivel1 inherits Fondos {
 	
 	method image() = "fondo.png"
 	
+	
+	
 	override method iniciar(){
 		game.clear()
 		game.addVisual(self)
-		
+		creador.crearPowerUpBomba1()
 		creador.creacionBloquesNivel1()
 		creador.creacionEnemigoNivel1()
 		
@@ -243,3 +245,9 @@ object nivel3 inherits Fondos {
 		}
 	}	
 }
+
+
+	
+
+
+

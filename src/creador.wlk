@@ -2,6 +2,7 @@ import wollok.game.*
 import Padre.*
 import enemigos.*
 import fondos.*
+import bombasYFuego.*
 
 object creador{
 	
@@ -47,9 +48,23 @@ object creador{
 	const posicionesEnemigosNivel1 = #{game.at(66,6),game.at(66,66),game.at(30,60),game.at(6,6)}
 	const posicionesEnemigosNivel2 = #{game.at(66,6),game.at(66,66),game.at(30,60),game.at(66,36),game.at(42,54)}
 	const posicionesEnemigosNivel3 = #{game.at(18,30),game.at(30,60),game.at(6,6),game.at(66,36),game.at(36,54),game.at(36,18)}
+
+	
+	method crearPowerUpBomba1(){
+		const powerBomba = new PowerUpBomba(position = posicionesBloquesNivel1.anyOne())
+		const powerVelocidad = new PowerUpVelocidad(position = posicionesBloquesNivel1.anyOne())
+		const powerFuego = new PowerUpFuego(position = posicionesBloquesNivel1.anyOne())
+		game.addVisual(powerBomba)
+		game.whenCollideDo(powerBomba,{ algo => algo.colisionCon(powerBomba)})
+		game.addVisual(powerVelocidad)
+		game.whenCollideDo(powerVelocidad,{ algo => algo.colisionCon(powerVelocidad)})
+		game.addVisual(powerFuego)
+		game.whenCollideDo(powerFuego,{ algo => algo.colisionCon(powerFuego)})
+		
+	}
 	
 	method creacionBloquesNivel1(){
-
+		
 		posicionesBloquesNivel1.forEach({posicion =>
 			
 			const bloque = new Bloque(position = posicion)

@@ -142,4 +142,54 @@ class Fuego inherits ElementosAnimadosSinMovimiento {
 	
 }
 
+class PowerUpBomba inherits Elementos{
+	
+	const property position
+	
+	method image() = "powerUp_bombas"
+	
+	override method colisionCon(objeto){
+		if(objeto.equals(bomber) or objeto.equals(bomberSinAnimaciones)){
+			objeto.cantidadBomba(objeto.cantidadBomba() + 1)			
+			game.removeVisual(self)
+		}
+	}
+	
+	override method destruccion(){}
+		
+
+	
+}
+			
+class PowerUpVelocidad inherits Elementos{
+	const property position
+	method image() = "powerUp_velocidad"
+	
+	override method colisionCon(objeto){
+		if(objeto.equals(bomber) or objeto.equals(bomberSinAnimaciones)){
+			objeto.velocidad(objeto.velocidad() / 2)			
+			game.removeVisual(self)
+		}
+	}
+	override method destruccion(){}
+	
+}
+	
+class PowerUpFuego inherits Elementos{
+	const property position
+	method image() = "powerUp_fuego"
+	
+	override method colisionCon(objeto){
+		if(objeto.equals(bomber) or objeto.equals(bomberSinAnimaciones)){
+			objeto.rangoDeBombas(objeto.rangoDeBombas() + 1)		
+			game.removeVisual(self)
+		}	
+	}
+	override method destruccion(){}
+	
+}
+	
+
+
+
 
