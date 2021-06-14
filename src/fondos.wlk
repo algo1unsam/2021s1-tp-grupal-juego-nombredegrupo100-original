@@ -75,13 +75,22 @@ object gameOver inherits Fondos {
 }
 
 object fondoMenu inherits Fondos {		//fondo del menu principal
-	
+	var flagMusica = false
 	method image() = "menu2.png"
 	
 	override method iniciar(){
 		game.clear()
 		game.addVisual(self)
 		self.configurar()
+		
+		if (!flagMusica){
+			game.onTick(50,"Sonido",{
+			game.sound("01_TitleScreen.mp3").play()
+			game.sound("01_TitleScreen.mp3").shouldLoop(true)
+			game.sound("01_TitleScreen.mp3").volume(0.3)
+			game.removeTickEvent("Sonido")
+			flagMusica = !flagMusica})
+		}
 	}
 	
 	override method configurar() {
@@ -174,7 +183,11 @@ object nivel1 inherits Fondos {
 		
 		if(animaciones.animaciones()){game.addVisual(bomber)}
 		else{game.addVisual(bomberSinAnimaciones)}
-		self.configurar()	
+		self.configurar()
+		
+		game.sound("Bomberman (NES) Music - Stage Theme.mp3").play()
+		game.sound("Bomberman (NES) Music - Stage Theme.mp3").shouldLoop(true)
+		game.sound("Bomberman (NES) Music - Stage Theme.mp3").volume(0.3)
 	}
 	
 	override method ganar(){
