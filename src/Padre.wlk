@@ -2,7 +2,7 @@ import wollok.game.*
 import bomber.*
 import fondos.*
 
-//Clase padre de todos los elementos, contienen algunas variables escenciales para cada objeto
+//Clase padre de todos los elementos, contienen algunas variables  escenciales para cada objeto
 class Elementos {
 	
 //metodo de destrucion de un elemento
@@ -141,5 +141,3 @@ class Bloque inherits Elementos {
 		
 	}	
 }
-
-//#######################################################################################################

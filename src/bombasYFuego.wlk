@@ -5,15 +5,15 @@ import bomber.*
 //Clase Bomba, clase de, como si nombre lo indica, las bombas
 class Bomba inherits Elementos {
 	
-	var property image = "bomba.png"
+	var property image = "bomba.png"	//imagen de las bombas
 	const property position
-	const property imagenesExplosion = ["bomba2.png","bomba3.png"]
-	const property velocidad = 1000
-	var property rango = 1
+	const property imagenesExplosion = ["bomba2.png","bomba3.png"]	//imagenes para la animacio
+	const property velocidad = 1000				//velocidad de explosion de las bombas
+	var property rango = 1					//rango de las bombas
 
+	method esAtravesable(){return false}	//metodo que indica si un objeto se puede atravesar o no
+	
 //Metodos de condicion, estos se usan para la extension del fuego
-
-	method esAtravesable(){return false}
 
 	method condicionArriba(n){
 		const destino = self.position().up(6 * n)
@@ -117,7 +117,6 @@ class Bomba inherits Elementos {
 	override method colisionCon(objeto){
 		
 	}
-
 }
 
 //Clase Fuego, clase del fuego de la bomba
@@ -142,13 +141,18 @@ class Fuego inherits ElementosAnimadosSinMovimiento {
 	
 }
 
+//######################################## Power Ups ##############################################
+
+//PowerUp de la cantidad de bombas 
 class PowerUpBomba inherits Elementos{
 	
 	const property position
 	
-	method image() = "powerUp_bombas"
+	method image() = "powerUp_bombas.jpeg"		//imagen del powerUp
 	
-	override method colisionCon(objeto){
+	method esAtravesable(){return true}
+	
+	override method colisionCon(objeto){		//colision del objeto, solo se ejecuta si el bomber lo toca
 		if(objeto.equals(bomber) or objeto.equals(bomberSinAnimaciones)){
 			objeto.cantidadBomba(objeto.cantidadBomba() + 1)			
 			game.removeVisual(self)
@@ -160,10 +164,13 @@ class PowerUpBomba inherits Elementos{
 
 	
 }
-			
+	
+//PowerUp de la velocidad del bomber(solo funciona con el bomber con animaciones)	
 class PowerUpVelocidad inherits Elementos{
 	const property position
-	method image() = "powerUp_velocidad"
+	method image() = "powerUp_velocidad.jpeg"
+	
+	method esAtravesable(){return true}
 	
 	override method colisionCon(objeto){
 		if(objeto.equals(bomber) or objeto.equals(bomberSinAnimaciones)){
@@ -175,9 +182,12 @@ class PowerUpVelocidad inherits Elementos{
 	
 }
 	
+//PowerUp del rango de las bombas
 class PowerUpFuego inherits Elementos{
 	const property position
-	method image() = "powerUp_fuego"
+	method image() = "powerUp_fuego.jpeg"
+	
+	method esAtravesable(){return true}
 	
 	override method colisionCon(objeto){
 		if(objeto.equals(bomber) or objeto.equals(bomberSinAnimaciones)){
