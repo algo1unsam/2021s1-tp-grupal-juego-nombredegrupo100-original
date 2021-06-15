@@ -286,7 +286,7 @@ object nivel3 inherits Fondos {
 	
 	override method iniciar(){
 		
-		if(animaciones.animaciones()){bomber.position(game.at(30,30))}
+		if(animaciones.animaciones()){bomber.position(game.at(78,6))}
 		else{bomberSinAnimaciones.position(game.at(78,6))}
 		
 		game.clear()
