@@ -2,9 +2,9 @@
 
 ## BOMBERMAN 💣
 
-Alumnos:  -Ivan Cotti
-          -Francisco Soto Rottenbücher
-          
+Alumnos:  Ivan Cotti, Francisco Soto Rottenbücher
+    
+    
 Para la entrega final de la materia elegímos crear una imitación del famoso juego "BOMBERMAN". Muchos ya lo conocen, pero pasamos a hacer una introducción:
 
 ![mi fotoo](bombeerrrr.jpg)
