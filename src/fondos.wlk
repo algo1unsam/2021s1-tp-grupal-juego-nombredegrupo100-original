@@ -205,6 +205,24 @@ object fondoGanarNivel3 inherits Fondos{
 
 object nivel1 inherits Fondos {
 	
+	const posicionesDelNivelBloques = #{
+							game.at(18,66),game.at(24,66),game.at(30,66),game.at(36,66),game.at(42,66),game.at(48,66),game.at(54,66),game.at(60,66),game.at(66,66),
+							game.at(18,60),game.at(30,60),game.at(54,60),game.at(66,60),
+							game.at(6,54),game.at(12,54),game.at(30,54),game.at(36,54),game.at(42,54),game.at(54,54),game.at(60,54),game.at(78,54),
+							game.at(30,48),game.at(42,48),game.at(54,48),game.at(66,48),game.at(78,48),
+							game.at(6,42),game.at(12,42),game.at(24,42),game.at(42,42),game.at(48,42),game.at(54,42),game.at(60,42),game.at(72,42),game.at(78,42),
+							game.at(6,36),game.at(18,36),game.at(30,36),game.at(42,36),game.at(54,36),game.at(66,36),game.at(78,36),
+							game.at(6,30),game.at(12,30),game.at(18,30),game.at(24,30),game.at(30,30),game.at(36,30),game.at(42,30),game.at(60,30),game.at(66,30),game.at(72,30),game.at(78,30),
+							game.at(6,24),game.at(18,24),game.at(54,24),game.at(66,24),game.at(78,24),
+							game.at(6,18),game.at(12,18),game.at(24,18),game.at(30,18),game.at(36,18),game.at(48,18),game.at(54,18),game.at(60,18),game.at(66,18),game.at(72,18),game.at(78,18),
+							game.at(18,12),game.at(30,12),game.at(42,12),
+							game.at(18,6),game.at(24,6),game.at(30,6),game.at(36,6),game.at(42,6),game.at(48,6),game.at(54,6),game.at(60,6),game.at(66,6)
+							} 
+	
+	const posicionesDelNivelEnemigos = #{game.at(66,6),game.at(66,66),game.at(30,60),game.at(6,6)}
+	
+	const posicionesDelNivelPowerUp = [game.at(42,48),game.at(36,66),game.at(36,30)]
+	
 	method image() = "fondo.png"
 	
 	override method iniciar(){
@@ -214,9 +232,9 @@ object nivel1 inherits Fondos {
 		game.clear()
 		game.addVisual(self)
 		
-		creador.crearPowerUpBomba1()
-		creador.creacionBloquesNivel1()
-		creador.creacionEnemigoNivel1()
+		creador.crearPowerUp(posicionesDelNivelPowerUp)
+		creador.creacionBloques(posicionesDelNivelBloques)
+		creador.creacionEnemigos(posicionesDelNivelEnemigos,2000,self)
 		
 		if(animaciones.animaciones()){game.addVisual(bomber)}
 		else{game.addVisual(bomberSinAnimaciones)}
@@ -244,6 +262,23 @@ object nivel1 inherits Fondos {
 
 object nivel2 inherits Fondos {
 	
+	const posicionesDelNivelBloques = #{
+							game.at(6,66),game.at(12,66),game.at(18,66),game.at(24,66),game.at(30,66),game.at(36,66),game.at(42,66),game.at(48,66),game.at(54,66),game.at(60,66),game.at(72,66),game.at(78,66),
+							game.at(6,66),game.at(18,60),game.at(30,60),game.at(54,60),game.at(66,60),game.at(78,60),
+							game.at(6,54),game.at(12,54),game.at(18,54),game.at(24,54),game.at(30,54),game.at(54,54),game.at(60,54),game.at(66,54),game.at(72,54),game.at(78,54),
+							game.at(30,48),game.at(42,48),game.at(54,48),game.at(66,48),game.at(78,48),
+							game.at(6,42),game.at(12,42),game.at(24,42),game.at(42,42),game.at(48,42),game.at(54,42),game.at(60,42),game.at(72,42),game.at(78,42),
+							game.at(6,36),game.at(18,36),game.at(30,36),game.at(42,36),game.at(54,36),game.at(66,36),game.at(78,36),
+							game.at(6,30),game.at(12,30),game.at(18,30),game.at(24,30),game.at(30,30),game.at(36,30),game.at(42,30),game.at(60,30),game.at(66,30),game.at(72,30),game.at(78,30),
+							game.at(6,24),game.at(18,24),game.at(54,24),game.at(66,24),game.at(78,24),
+							game.at(6,18),game.at(12,18),game.at(24,18),game.at(30,18),game.at(36,18),game.at(48,18),game.at(54,18),game.at(60,18),game.at(66,18),game.at(72,18),game.at(78,18),
+							game.at(18,12),game.at(30,12),game.at(42,12),
+							game.at(18,6),game.at(24,6),game.at(30,6),game.at(36,6),game.at(42,6),game.at(48,6),game.at(54,6),game.at(60,6),game.at(66,6)
+	}
+	
+	const posicionesDelNivelEnemigos = #{game.at(66,6),game.at(66,66),game.at(30,60),game.at(66,36),game.at(42,54)}
+	
+	const posicionesDelNivelPowerUp = [game.at(30,36),game.at(6,42),game.at(54,66)]
 	method image() = "fondo2.png"
 	
 	override method iniciar(){
@@ -254,9 +289,9 @@ object nivel2 inherits Fondos {
 		game.clear()
 		game.addVisual(self)
 		
-		creador.crearPowerUpBomba2()
-		creador.creacionBloquesNivel2()
-		creador.creacionEnemigoNivel2()
+		creador.crearPowerUp(posicionesDelNivelPowerUp)
+		creador.creacionBloques(posicionesDelNivelBloques)
+		creador.creacionEnemigos(posicionesDelNivelEnemigos,1000,self)
 		
 		if(animaciones.animaciones()){game.addVisual(bomber)}
 		else{game.addVisual(bomberSinAnimaciones)}
@@ -282,6 +317,24 @@ object nivel2 inherits Fondos {
 
 object nivel3 inherits Fondos {
 	
+	const posicionesDelNivelBloques = #{
+							game.at(6,66),game.at(12,66),game.at(42,66),game.at(48,66),game.at(54,66),game.at(60,66),game.at(72,66),
+							game.at(6,66),game.at(18,60),game.at(54,60),game.at(66,60),game.at(78,60),
+							game.at(6,54),game.at(12,54),game.at(18,54),game.at(24,54),game.at(30,54),game.at(48,54),game.at(54,54),game.at(60,54),game.at(66,54),game.at(72,54),game.at(78,54),
+							game.at(30,48),game.at(42,48),game.at(54,48),game.at(66,48),game.at(78,48),
+							game.at(6,42),game.at(12,42),game.at(24,42),game.at(42,42),game.at(48,42),game.at(54,42),game.at(60,42),game.at(78,42),
+							game.at(6,36),game.at(18,36),game.at(30,36),game.at(42,36),game.at(54,36),game.at(78,36),
+							game.at(6,30),game.at(30,30),game.at(36,30),game.at(42,30),game.at(60,30),game.at(66,30),game.at(72,30),game.at(78,30),
+							game.at(6,24),game.at(18,24),game.at(54,24),game.at(66,24),game.at(78,24),
+							game.at(6,18),game.at(12,18),game.at(24,18),game.at(48,18),game.at(54,18),game.at(60,18),game.at(66,18),game.at(72,18),game.at(78,18),
+							game.at(18,12),game.at(30,12),
+							game.at(18,6),game.at(24,6),game.at(30,6),game.at(36,6),game.at(42,6),game.at(48,6),game.at(54,6),game.at(60,6)
+	}
+	
+	const posicionesDelNivelEnemigos = #{game.at(18,30),game.at(30,60),game.at(6,6),game.at(66,36),game.at(36,54),game.at(36,18)}
+	
+	const posicionesDelNivelPowerUp = [game.at(66,48),game.at(18,12),game.at(60,6)]
+	
 	method image() = "fondo3.png"
 	
 	override method iniciar(){
@@ -292,9 +345,9 @@ object nivel3 inherits Fondos {
 		game.clear()
 		game.addVisual(self)
 		
-		creador.crearPowerUpBomba3()
-		creador.creacionBloquesNivel3()
-		creador.creacionEnemigoNivel3()
+		creador.crearPowerUp(posicionesDelNivelPowerUp)
+		creador.creacionBloques(posicionesDelNivelBloques)
+		creador.creacionEnemigos(posicionesDelNivelEnemigos,500,self)
 		
 		if(animaciones.animaciones()){game.addVisual(bomber)}
 		else{game.addVisual(bomberSinAnimaciones)}
